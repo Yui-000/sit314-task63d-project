@@ -16,13 +16,9 @@ RUN npm install
 # Copy source code
 COPY . .
 
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nodejs -u 1001
-
-# Change ownership
-RUN chown -R nodejs:nodejs /app
-USER nodejs
+# Skip user creation for faster build (development only)
+# RUN addgroup -g 1001 -S nodejs && adduser -S nodejs -u 1001
+# USER nodejs
 
 # Expose port
 EXPOSE 3000
