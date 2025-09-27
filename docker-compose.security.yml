@@ -7,8 +7,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: smart-agriculture-frontend
-    ports:
-      - "3000:3000"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       # 前端通过Nginx代理访问API，不需要知道具体IP
@@ -34,8 +33,7 @@ services:
       context: ./auth-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-auth
-    ports:
-      - "3001:3001"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       - PORT=3001
@@ -69,8 +67,7 @@ services:
       context: ./encryption-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-encryption
-    ports:
-      - "3002:3002"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       - PORT=3002
@@ -96,8 +93,7 @@ services:
       context: ./security-audit
       dockerfile: Dockerfile
     container_name: smart-agriculture-audit
-    ports:
-      - "3003:3003"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       - PORT=3003
@@ -126,8 +122,7 @@ services:
       context: .
       dockerfile: Dockerfile.sensor-api
     container_name: smart-agriculture-sensor-api
-    ports:
-      - "3004:3004"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       - PORT=3004
@@ -147,8 +142,7 @@ services:
       context: ./decision-engine-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-decision-engine
-    ports:
-      - "3005:3005"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       - PORT=3005
@@ -169,8 +163,7 @@ services:
       context: ./data-processing-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-data-processing
-    ports:
-      - "3006:3006"
+    # 端口不暴露，通过Nginx代理访问
     environment:
       - NODE_ENV=production
       - PORT=3006
