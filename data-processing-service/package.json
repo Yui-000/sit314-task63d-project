@@ -14,7 +14,8 @@
     "mqtt": "^5.3.4",
     "axios": "^1.5.0",
     "moment": "^2.29.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
