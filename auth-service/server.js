@@ -11,7 +11,7 @@ const UserManagement = require('./user-management');
 const SecurityMiddleware = require('./security-middleware');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const port = 3001;
 
 // MongoDB connection
 const connectToMongoDB = async () => {
@@ -386,9 +386,8 @@ const startServer = async () => {
   try {
     await connectToMongoDB();
     
-    app.listen(PORT, () => {
-        console.log(`Auth service running on port ${PORT}`);
-        console.log(`Health check: http://localhost:${PORT}/health`);
+    app.listen(port, () => {
+        console.log(`listening on port ${port}`);
         
         // Clean up expired sessions every hour
         setInterval(() => {

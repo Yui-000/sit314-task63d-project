@@ -1,27 +1,17 @@
 # Docker Compose configuration for Smart Agriculture IoT System
 
 services:
-  # Frontend Service
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: smart-agriculture-frontend
-    # 端口不暴露，通过Nginx代理访问
-    environment:
-      - NODE_ENV=production
-      # 前端通过Nginx代理访问API，不需要知道具体IP
-      - REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL:-}
-      - REACT_APP_AUTH_SERVICE_URL=${REACT_APP_AUTH_SERVICE_URL:-/api/auth}
-      - REACT_APP_ENCRYPTION_SERVICE_URL=${REACT_APP_ENCRYPTION_SERVICE_URL:-/api/encrypt}
-      - REACT_APP_AUDIT_SERVICE_URL=${REACT_APP_AUDIT_SERVICE_URL:-/api/events}
-      - REACT_APP_SENSOR_SERVICE_URL=${REACT_APP_SENSOR_SERVICE_URL:-/api/sensors}
-      - REACT_APP_DECISION_SERVICE_URL=${REACT_APP_DECISION_SERVICE_URL:-/api/decisions}
-      - REACT_APP_DATA_SERVICE_URL=${REACT_APP_DATA_SERVICE_URL:-/api/data}
-    networks:
-      - smart-agriculture-network
-    restart: unless-stopped
-    # 移除健康检查以减少资源消耗
+  # Frontend Service - REMOVED (runs locally)
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: smart-agriculture-frontend
+  #   environment:
+  #     - NODE_ENV=production
+  #   networks:
+  #     - smart-agriculture-network
+  #   restart: unless-stopped
 
   # Authentication Service
   auth-service:
@@ -29,7 +19,8 @@ services:
       context: ./auth-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-auth
-    # 端口不暴露，通过Nginx代理访问
+    ports:
+      - "3001:3001"
     environment:
       - NODE_ENV=production
       - PORT=3001
@@ -54,7 +45,8 @@ services:
       context: ./encryption-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-encryption
-    # 端口不暴露，通过Nginx代理访问
+    ports:
+      - "3002:3002"
     environment:
       - NODE_ENV=production
       - PORT=3002
@@ -73,7 +65,8 @@ services:
       context: ./security-audit
       dockerfile: Dockerfile
     container_name: smart-agriculture-audit
-    # 端口不暴露，通过Nginx代理访问
+    ports:
+      - "3003:3003"
     environment:
       - NODE_ENV=production
       - PORT=3003
@@ -94,7 +87,8 @@ services:
       context: .
       dockerfile: Dockerfile.sensor-api
     container_name: smart-agriculture-sensor-api
-    # 端口不暴露，通过Nginx代理访问
+    ports:
+      - "3004:3004"
     environment:
       - NODE_ENV=production
       - PORT=3004
@@ -110,7 +104,8 @@ services:
       context: ./decision-engine-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-decision-engine
-    # 端口不暴露，通过Nginx代理访问
+    ports:
+      - "3005:3005"
     environment:
       - NODE_ENV=production
       - PORT=3005
@@ -127,7 +122,8 @@ services:
       context: ./data-processing-service
       dockerfile: Dockerfile
     container_name: smart-agriculture-data-processing
-    # 端口不暴露，通过Nginx代理访问
+    ports:
+      - "3006:3006"
     environment:
       - NODE_ENV=production
       - PORT=3006
@@ -138,28 +134,8 @@ services:
     restart: unless-stopped
     # 移除健康检查以减少资源消耗
 
-  # Nginx Load Balancer
-  nginx:
-    image: nginx:alpine
-    container_name: smart-agriculture-nginx
-    ports:
-      - "8080:80"
-      - "8443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    networks:
-      - smart-agriculture-network
-    restart: unless-stopped
-    depends_on:
-      - frontend
-      - auth-service
-      - encryption-service
-      - security-audit
-      - sensor-api
-      - decision-engine
-      - data-processing
-    security_opt:
-      - no-new-privileges:true
+  # Nginx Load Balancer - REMOVED (frontend runs locally)
+  # Frontend runs locally, no need for Nginx proxy
 
   # Redis Cache
   redis:

@@ -6,7 +6,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const SecurityAuditService = require('./audit-service');
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const port = 3003;
 
 // Initialize audit service
 const auditService = new SecurityAuditService();
@@ -291,9 +291,8 @@ app.use((req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`Security audit service running on port ${PORT}`);
-    console.log(`Health check: http://localhost:${PORT}/health`);
+app.listen(port, () => {
+    console.log(`listening on port ${port}`);
 });
 
 module.exports = app;

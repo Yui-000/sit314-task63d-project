@@ -6,7 +6,7 @@ require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
 const EncryptionService = require('./encryption');
 
 const app = express();
-const PORT = process.env.PORT || 3002;
+const port = 3002;
 
 // Initialize encryption service
 const encryptionService = new EncryptionService();
@@ -351,9 +351,8 @@ app.use((req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-    console.log(`Encryption service running on port ${PORT}`);
-    console.log(`Health check: http://localhost:${PORT}/health`);
+app.listen(port, () => {
+    console.log(`listening on port ${port}`);
 });
 
 module.exports = app;

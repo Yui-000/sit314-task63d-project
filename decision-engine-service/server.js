@@ -8,7 +8,7 @@ const IrrigationController = require('./irrigation-controller');
 const NotificationService = require('./notification-service');
 
 const app = express();
-const PORT = process.env.PORT || 3005;
+const port = 3005;
 
 // Middleware
 app.use(cors());
@@ -210,8 +210,8 @@ const startServer = async () => {
     // Wait for MongoDB connection first
     await connectToMongoDB();
     
-    app.listen(PORT, () => {
-      console.log(`🚀 Decision Engine Service running on port ${PORT}`);
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`);
       connectMQTT();
     });
   } catch (error) {

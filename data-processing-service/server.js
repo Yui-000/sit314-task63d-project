@@ -8,7 +8,7 @@ const DataValidator = require('./data-validator');
 const DataAnalyzer = require('./data-analyzer');
 
 const app = express();
-const PORT = process.env.PORT || 3006;
+const port = 3006;
 
 // Middleware
 app.use(cors());
@@ -218,8 +218,8 @@ const startServer = async () => {
     // Wait for MongoDB connection first
     await connectToMongoDB();
     
-    app.listen(PORT, () => {
-      console.log(`🚀 Data Processing Service running on port ${PORT}`);
+    app.listen(port, () => {
+      console.log(`listening on port ${port}`);
       connectMQTT();
     });
   } catch (error) {

@@ -3,7 +3,7 @@ const cors = require('cors');
 const mqtt = require('mqtt');
 
 const app = express();
-const PORT = 3004;
+const port = 3004;
 
 // Middleware
 app.use(cors());
@@ -159,8 +159,8 @@ app.get('/api/sensors/data', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
-  console.log(`🚀 Sensor API Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
   connectMQTT();
 });
 
