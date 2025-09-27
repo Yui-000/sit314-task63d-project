@@ -4,7 +4,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install minimal dependencies
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl dumb-init
 
 # Copy package files
 COPY sensor-api-package.json package.json
@@ -31,5 +31,5 @@ EXPOSE 3004
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3004/health || exit 1
 
-# Start the application
-CMD ["node", "sensor-api-server.js"]
+# Start the application with dumb-init
+CMD ["dumb-init", "--", "node", "sensor-api-server.js"]

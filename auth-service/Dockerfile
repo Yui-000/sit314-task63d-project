@@ -4,7 +4,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install minimal dependencies
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl dumb-init
 
 # Skip user creation for faster build (development only)
 # RUN addgroup -g 1001 -S nodejs && \
@@ -33,7 +33,5 @@ EXPOSE 3001
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:3001/health || exit 1
 
-# Direct start
-
-# Start the application
-CMD ["node", "server.js"]
+# Start the application with dumb-init
+CMD ["dumb-init", "--", "node", "server.js"]

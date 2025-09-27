@@ -4,7 +4,7 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Install minimal dependencies
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl dumb-init
 
 # Copy package files
 COPY package*.json ./
@@ -30,5 +30,5 @@ EXPOSE 3005
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD curl -f http://localhost:3005/health || exit 1
 
-# Start the application
-CMD ["node", "server.js"]
+# Start the application with dumb-init
+CMD ["dumb-init", "--", "node", "server.js"]
