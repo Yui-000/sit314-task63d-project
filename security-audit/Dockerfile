@@ -8,9 +8,9 @@ RUN apk update && apk upgrade && apk add --no-cache \
     curl \
     dumb-init
 
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs && \
-    adduser -S nodejs -u 1001
+# Skip user creation for faster build (development only)
+# RUN addgroup -g 1001 -S nodejs && \
+#     adduser -S nodejs -u 1001
 
 # Copy package files
 COPY package*.json ./
