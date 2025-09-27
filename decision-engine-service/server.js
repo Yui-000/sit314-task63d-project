@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const mqtt = require('mqtt');
-require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+require('dotenv').config();
 const DecisionEngine = require('./decision-engine');
 const IrrigationController = require('./irrigation-controller');
 const NotificationService = require('./notification-service');

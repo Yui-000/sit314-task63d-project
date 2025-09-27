@@ -4,7 +4,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const { body, validationResult } = require('express-validator');
 const mongoose = require('mongoose');
-require('dotenv').config({ path: require('path').join(__dirname, '../.env') });
+require('dotenv').config();
 
 const AuthService = require('./auth');
 const UserManagement = require('./user-management');

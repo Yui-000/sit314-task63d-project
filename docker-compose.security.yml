@@ -124,6 +124,8 @@ services:
     container_name: smart-agriculture-data-processing
     ports:
       - "3006:3006"
+    volumes:
+      - ./.env:/app/.env:ro
     environment:
       - NODE_ENV=production
       - PORT=3006
