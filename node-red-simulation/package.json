@@ -1,0 +1,29 @@
+{
+  "name": "smart-agriculture-sensor-simulator",
+  "version": "1.0.0",
+  "description": "IoT sensor simulation for Smart Agriculture project",
+  "main": "sensor-simulator.js",
+  "scripts": {
+    "start": "node sensor-simulator.js",
+    "test": "node test-simulator.js",
+    "dev": "nodemon sensor-simulator.js"
+  },
+  "keywords": [
+    "iot",
+    "agriculture",
+    "sensors",
+    "mqtt",
+    "simulation"
+  ],
+  "author": "Smart Agriculture IoT Team",
+  "license": "MIT",
+  "dependencies": {
+    "mqtt": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

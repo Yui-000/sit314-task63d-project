@@ -1,0 +1,24 @@
+{
+  "name": "smart-agriculture-iot",
+  "version": "1.0.0",
+  "description": "Smart Agriculture IoT Management System",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:backend": "concurrently \"node sensor-api-server.js\" \"cd auth-service && npm start\" \"cd encryption-service && npm start\" \"cd security-audit && npm start\" \"cd decision-engine-service && npm start\" \"cd data-processing-service && npm start\"",
+    "start:frontend": "cd frontend && npm start",
+    "start:docker": "docker-compose -f docker-compose.security.yml up -d",
+    "stop": "docker-compose -f docker-compose.security.yml down",
+    "logs": "docker-compose -f docker-compose.security.yml logs -f",
+    "install:all": "npm install && cd frontend && npm install && cd ../auth-service && npm install && cd ../encryption-service && npm install && cd ../security-audit && npm install && cd ../decision-engine-service && npm install && cd ../data-processing-service && npm install"
+  },
+  "dependencies": {
+    "axios": "^1.12.1",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^4.18.2",
+    "mongoose": "^8.18.1",
+    "mqtt": "^5.3.4"
+  }
+}
