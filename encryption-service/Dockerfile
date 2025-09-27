@@ -3,10 +3,8 @@ FROM node:18-alpine
 # Create app directory
 WORKDIR /app
 
-# Install security updates
-RUN apk update && apk upgrade && apk add --no-cache \
-    curl \
-    dumb-init
+# Install minimal dependencies
+RUN apk add --no-cache curl
 
 # Skip user creation for faster build (development only)
 # RUN addgroup -g 1001 -S nodejs && \
@@ -32,8 +30,7 @@ EXPOSE 3002
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:3002/health || exit 1
 
-# Use dumb-init to handle signals properly
-ENTRYPOINT ["dumb-init", "--"]
+# Direct start
 
 # Start the application
 CMD ["node", "server.js"]
