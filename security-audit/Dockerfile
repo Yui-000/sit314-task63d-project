@@ -22,13 +22,11 @@ RUN npm install --omit=dev && npm cache clean --force
 COPY . .
 
 # Create logs directory
-RUN mkdir -p /app/logs && chown -R nodejs:nodejs /app
+RUN mkdir -p /app/logs
 
-# Set ownership
-RUN chown -R nodejs:nodejs /app
-
-# Switch to non-root user
-USER nodejs
+# Skip user creation for faster build (development only)
+# RUN chown -R nodejs:nodejs /app
+# USER nodejs
 
 # Expose port
 EXPOSE 3003

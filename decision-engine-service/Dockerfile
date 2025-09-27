@@ -19,9 +19,9 @@ COPY . .
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nodejs -u 1001
 
-# Change ownership
-RUN chown -R nodejs:nodejs /app
-USER nodejs
+# Skip user creation for faster build (development only)
+# RUN chown -R nodejs:nodejs /app
+# USER nodejs
 
 # Expose port
 EXPOSE 3005
